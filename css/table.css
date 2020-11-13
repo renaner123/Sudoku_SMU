@@ -23,7 +23,6 @@ input {
   width: 48px;
   height: 48px;
   font-size: 24px;
-  outline: none;
 }
 
 input:disabled {
