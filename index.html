@@ -15,15 +15,23 @@
 
   <body>
 
-    <div class="container">       
+    <div id = "container" class="container">    
+
+    <h1>Sudoku Board</h1>   
+
     <div id="timer">
       <button onclick="start();" class="bg-green">Iniciar</button>
       <button onclick="pause();" class="bg-yellow">Pausar</button>
       <button onclick="stop();" class="bg-red">Parar</button>
-      <h1 id="counter">00:00:00</h1>
+      <h2 id="counter">00:00:00</h2>
     </div>   
 
-      <h1>HTML Sudoku Board</h1>
+      <select name="tDifficulty" id="cDifficulty">
+        <option value="62"selected >Easy</option> <!--value é o que vai ser enviado para o banco de dados-->
+        <option value="53" >Medium</option>
+        <option value="44" >Hard</option>    
+        <option value="35" >Very-Hard</option>    
+      </select>
 
       <section id="board">
         <table id="grid">
@@ -172,13 +180,6 @@
           <button id="disconnectButton" name="disconnectButton" class="buttonright" disabled>
             Desconectar
           </button>
-
-
-
-
-
-
-
         </aside>
 
 

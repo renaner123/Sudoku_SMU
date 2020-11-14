@@ -43,6 +43,14 @@ div#timer {
   margin-top: 10px;
 }
 
+div#container h1 {
+  text-align: center;
+}
+
+div#container select {
+  margin-bottom: 10px;
+}
+
 footer#rodape {
   clear: both; /*Limpa configuração dos dois lados, no caso vai pra baixo*/
   border-top: 1px #606060 solid;
