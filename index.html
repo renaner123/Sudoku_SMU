@@ -161,13 +161,24 @@
         </table>
       </section>  
 
-         <button onclick="checkBoard()" id="newBoard">New</button>
+         <button onclick="newBoard()" id="newBoard">New</button>
          <button onclick="clearBoard(),stop()" id="clear">Clear</button>
          <button onclick="solve()" id="solve">Solve</button>
 
 
         <aside  id="lateral">
-            deixar chat aqui
+          <button  onclick="webRtc()" id="connectButton" name="connectButton" class="buttonleft"> Conectar
+          </button>
+          <button id="disconnectButton" name="disconnectButton" class="buttonright" disabled>
+            Desconectar
+          </button>
+
+
+
+
+
+
+
         </aside>
 
 
@@ -178,6 +189,7 @@
     </div>     
 
     <script src="libs/cronometro-js-master/cron.js"></script>
+
     
   </body>
 </html>
