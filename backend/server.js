@@ -1,15 +1,14 @@
 
-function generateMatrix(dificulty) {
-    let matrix = [];
-
-    for (let i = 0; i < 9; i++) {
-        let line = [];
-
-        for (let j = 0; j < 9; j++) {
-            let n = generateNumber(line);
-            line.push(n);
-        }
-        matrix.push(line);
-    }
-    return matrix;
+function rotate(arr, n) {
+    for (let i = 0; i < n; i++)
+        arr.push(arr.shift());
+    return arr;
 }
+
+
+function buildTable() {
+
+}
+
+
+console.log(buildTable())
