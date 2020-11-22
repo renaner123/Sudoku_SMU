@@ -1,5 +1,3 @@
-import construct = Reflect.construct;
-
 const BASE_MATRIX = [
     [1, 2, 3, 4, 5, 6, 7, 8, 9],
     [4, 5, 6, 7, 8, 9, 1, 2, 3],
@@ -14,65 +12,70 @@ const BASE_MATRIX = [
     [9, 7, 8, 3, 1, 2, 6, 4, 5]
 ]
 
+const ZONA_INDEX = [[0, 1, 2], [3, 4, 5], [6, 7, 8]];
+
+enum DificultyLevel {
+    EASY,
+    MEDIUM,
+    HARD,
+    ASIAN
+}
 
 export class Board {
     public board: number[][];
-    private ZONES_INDEXES: number[][] = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
-    private firstZoneLine: number[][];
+    private dificulty: {
+        max: number;
+        min: number;
+    }
 
 
-    // gera uma tabela completa
-    constructor() {
-        let board = BASE_MATRIX;
-
-        // Reordena as linhas em grupos de 3 em 3, mantendo assim as zonas organizadas
-        this.swap(this.ZONES_INDEXES, function (n, i) {
-            let buffer = board[i];
-            board[i] = board[n];
-            board[n] = buffer;
-            i++;
+    constructor(dificulty: number = DificultyLevel.EASY) {
+        this.board = []
+        ZONA_INDEX.forEach(zone => {
+            zone.sort(() => .5 - Math.random())
+            zone.forEach(i => this.board.push(BASE_MATRIX[i]))
         });
 
-        board = board.filter(Boolean);
+        if (dificulty === DificultyLevel.EASY) this.dificulty = {min: 2, max: 3}
+        if (dificulty === DificultyLevel.MEDIUM) this.dificulty = {min: 3, max: 5}
+        if (dificulty === DificultyLevel.HARD) this.dificulty = {min: 5, max: 7}
+        if (dificulty === DificultyLevel.ASIAN) this.dificulty = {min: 6, max: 8}
 
-        // Reordena as colunas em grupos de 3 em 3, matendo assim as zonas organizadas
-        this.swap(this.ZONES_INDEXES, function (n, i) {
-            let bufferIndex = Board.getRow(i, board).filter(Boolean);
-            let bufferNewIndex = Board.getRow(n, board).filter(Boolean);
 
-            board = Board.setRow(i, board, bufferNewIndex);
-            board = Board.setRow(n, board, bufferIndex);
-        })
-
-        this.board = board;
-    }
-
-    
-    private static getRow(i: number, board: number[][]) {
-        let arr = []
-        board.forEach(line => arr.push(line[i]))
-        return arr;
     }
 
 
-    private static setRow(rowIndex: number, board: number[][], newRow: number[]) {
-        for (let j = 0; j < newRow.length; j++)
-            board[j][rowIndex] = newRow[j]
+    public getGameBoard() {
+        let lineIndex = 0;
+        this.board.forEach(line => {
+            let nToDelete = Math.floor(Math.random() * this.dificulty.min) + this.dificulty.max; // numero de elementos a deletar na linha
+            let elIndex = 0.
+            let deletedElements = 0;
 
-        return board;
-    }
+            line.forEach(() => {
 
-    // funcao para fazer a troca de posicao da matriz, mantendo as zonas
-    swap(indexes: number[][], callback) {
-        indexes.forEach(index => {
-            let i = 0;
-            index.sort(() => .5 - Math.random())
-                .forEach(n => callback(n, i))
+                if (Math.random() > .5 && (deletedElements < nToDelete)) {
+                    this.board[lineIndex][elIndex] = 0;
+                    deletedElements++;
+                }
+
+                elIndex++;
+            })
+            lineIndex++;
         })
     }
+
+
+    public toString() {
+        let str = "";
+        this.board.forEach(line => str += line.toString() + "\n");
+        return str;
+    }
+
 
 
 }
 
-let b = new Board();
-console.log(b.board);
+let b = new Board(DificultyLevel.ASIAN);
+b.getGameBoard()
+console.log(b.toString());
