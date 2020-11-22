@@ -47,7 +47,8 @@ export class Board {
 
     public getGameBoard() {
         let lineIndex = 0;
-        this.board.forEach(line => {
+        let board = this.board;
+        board.forEach(line => {
             let nToDelete = Math.floor(Math.random() * this.dificulty.min) + this.dificulty.max; // numero de elementos a deletar na linha
             let elIndex = 0.
             let deletedElements = 0;
@@ -63,19 +64,26 @@ export class Board {
             })
             lineIndex++;
         })
+        return board;
     }
 
 
     public toString() {
+        return this.matrixToString(this.board);
+    }
+
+    public matrixToString(board) {
         let str = "";
-        this.board.forEach(line => str += line.toString() + "\n");
+        board.forEach(line => str += line.toString() + "\n");
         return str;
     }
 
 
-
 }
 
-let b = new Board(DificultyLevel.ASIAN);
-b.getGameBoard()
-console.log(b.toString());
+let board = new Board();
+console.log("----- Preenchido -----")
+console.log(board.toString());
+
+console.log("----- Coisado -----")
+console.log(board.matrixToString(board.getGameBoard()));
