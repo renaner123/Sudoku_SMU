@@ -1,3 +1,5 @@
+import construct = Reflect.construct;
+
 const BASE_MATRIX = [
     [1, 2, 3, 4, 5, 6, 7, 8, 9],
     [4, 5, 6, 7, 8, 9, 1, 2, 3],
@@ -15,68 +17,62 @@ const BASE_MATRIX = [
 
 export class Board {
     public board: number[][];
+    private ZONES_INDEXES: number[][] = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
     private firstZoneLine: number[][];
 
+
+    // gera uma tabela completa
     constructor() {
-        this.board = [
-            [1, 2, 3, 4, 5, 6, 7, 8, 9],
-            [4, 5, 6, 7, 8, 9, 1, 2, 3],
-            [7, 8, 9, 1, 2, 3, 4, 5, 6],
+        let board = BASE_MATRIX;
 
-            [2, 3, 1, 5, 6, 4, 8, 9, 7],
-            [5, 6, 4, 8, 9, 7, 2, 3, 1],
-            [8, 9, 7, 2, 3, 1, 5, 6, 4],
+        // Reordena as linhas em grupos de 3 em 3, mantendo assim as zonas organizadas
+        this.swap(this.ZONES_INDEXES, function (n, i) {
+            let buffer = board[i];
+            board[i] = board[n];
+            board[n] = buffer;
+            i++;
+        });
 
-            [3, 1, 2, 6, 4, 5, 9, 7, 8],
-            [6, 4, 5, 9, 7, 8, 3, 1, 2],
-            [9, 7, 8, 3, 1, 2, 6, 4, 5]
-        ];
+        board = board.filter(Boolean);
 
-        // "bagunça" as linhas
-        [[1, 2, 3], [4, 5, 6], [7, 8, 9]].forEach(
-            (index) => {
-                let i = 0;
-                index.sort(() => .5 - Math.random())
-                    .forEach(n => {
-                        let buffer = this.board[i];
-                        this.board[i] = this.board[n];
-                        this.board[n] = buffer;
-                        i++;
-                    })
-            }
-        );
+        // Reordena as colunas em grupos de 3 em 3, matendo assim as zonas organizadas
+        this.swap(this.ZONES_INDEXES, function (n, i) {
+            let bufferIndex = Board.getRow(i, board).filter(Boolean);
+            let bufferNewIndex = Board.getRow(n, board).filter(Boolean);
 
-        //
-        // // "bagunça" as colunas
-        // [[1, 2, 3], [4, 5, 6], [7, 8, 9]].forEach(
-        //     (index) => {
-        //         let i = 0;
-        //         index.sort(() => .5 - Math.random())
-        //             .forEach(n => {
-        //                 let buffer = this.getRow(i);
-        //                 this.board[i] = this.board[n];
-        //                 this.board[n] = buffer;
-        //                 i++;
-        //             })
-        //     }
-        // );
+            board = Board.setRow(i, board, bufferNewIndex);
+            board = Board.setRow(n, board, bufferIndex);
+        })
 
+        this.board = board;
+    }
 
-        // console.log(index)
+    
+    private static getRow(i: number, board: number[][]) {
+        let arr = []
+        board.forEach(line => arr.push(line[i]))
+        return arr;
     }
 
 
-    // private getRow(rowIndex: number) {
-    //     let array = []
-    //     this.board.forEach(line => array.push(line[rowIndex]))
-    //     return array;
-    // }
+    private static setRow(rowIndex: number, board: number[][], newRow: number[]) {
+        for (let j = 0; j < newRow.length; j++)
+            board[j][rowIndex] = newRow[j]
+
+        return board;
+    }
+
+    // funcao para fazer a troca de posicao da matriz, mantendo as zonas
+    swap(indexes: number[][], callback) {
+        indexes.forEach(index => {
+            let i = 0;
+            index.sort(() => .5 - Math.random())
+                .forEach(n => callback(n, i))
+        })
+    }
+
+
 }
 
 let b = new Board();
-let l = BASE_MATRIX[0]
-console.log(l);
-let i = l[0]
-console.log(i);
-
-// https://stackoverflow.com/questions/6924216/how-to-generate-sudoku-boards-with-unique-solutions/7280517
+console.log(b.board);
