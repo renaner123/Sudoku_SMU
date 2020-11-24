@@ -81,9 +81,15 @@ export class Board {
 
 }
 
-let board = new Board();
-console.log("----- Preenchido -----")
-console.log(board.toString());
+// let board = new Board();
+// console.log("----- Preenchido -----")
+// console.log(board.toString());
+//
+// console.log("----- Coisado -----")
+// console.log(board.matrixToString(board.getGameBoard()));
 
-console.log("----- Coisado -----")
-console.log(board.matrixToString(board.getGameBoard()));
+
+let a = [[1,2,3], [4,5,6]]
+let b = [[1,2,3], [4,5,7]]
+
+console.log(JSON.stringify(a) == JSON.stringify(b))
