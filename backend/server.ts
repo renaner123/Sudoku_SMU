@@ -1,12 +1,14 @@
 import {Board} from "./Board";
 
 const express = require('express'), bodyParser = require('body-parser');
+const cors = require('cors')
 const app = express();
 app.use(bodyParser.json());
 
 
 const clientsBoards = {}
 
+app.use(cors());
 
 app.get("/teste", (req, res) => res.status(200).send("testado"))
 
@@ -31,7 +33,6 @@ app.post("/startNewGame", async (req, res) => {
     res.status(200).send({gameBoard: clientsBoards[req.body.clientId].gameBoard});
 
 });
-
 
 /**
  * body{
