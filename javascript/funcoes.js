@@ -18,17 +18,19 @@ function newBoard(){ // joga matrix para interface, no caso, uma matrix para ser
 
     var dificuldade = document.getElementById("cDifficulty");
 
-    // vai enviar um requisição com a dificuldade e vai receber uma matrix correspondente.
-    // células vazias devem vir como " " na matriz.
-    var cell = "";
-    var pos = 0;
-    for(var i =0;i<matrix.length;i++){
-        for(var y=0; y< matrix[0].length;y++){
-            cell = document.getElementById("cell-"+pos);
-            cell.value = matrix[i][y];    
-            pos++;
+    
+    var url = "http://localhost:42069/startNewGame";//Sua URL
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", url, true);
+
+    xhttp.onreadystatechange = function(){//Função a ser chamada quando a requisição retornar do servidor
+        if ( xhttp.readyState == 4 && xhttp.status == 200 ) {//Verifica se o retorno do servidor deu certo            
         }
     }
+    matrix = xhttp.send("dificuldade");
+
+
 };
 
 function solve(){ //envia a "matrix" que o usuário preencheu pra verificar com a matrix completa.
@@ -59,8 +61,21 @@ for(var i =0;i<matrix.length;i++){ //recebe valores do front e insere na matriz 
 
 function checkBoard(args){ //Verificar se o que o usuário enviar no solve está correto
    
-    var validate = true;
-    for(var i =0;i<matrix.length;i++){ //recebe valores do front e insere na matriz para comparar com o gabarito
+
+    var url = "http://localhost:42069/checkSolution";//Sua URL
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", url, true);
+
+    xhttp.onreadystatechange = function(){//Função a ser chamada quando a requisição retornar do servidor
+        if ( xhttp.readyState == 4 && xhttp.status == 200 ) {//Verifica se o retorno do servidor deu certo            
+        }
+    }
+    validate = xhttp.send(matrix);
+
+    (validate==false) ? alert("Try Gain") : alert("Gz"); */
+
+/*     for(var i =0;i<matrix.length;i++){ //recebe valores do front e insere na matriz para comparar com o gabarito
             for(var y=0; y< matrix.length;y++){
                 if(matrix[i][y]==args[i][y]){
                     continue;
@@ -69,7 +84,7 @@ function checkBoard(args){ //Verificar se o que o usuário enviar no solve está
                 }
             }
      }
-     (validate==false) ? alert("Try Gain") : alert("Gz");
+     (validate==false) ? alert("Try Gain") : alert("Gz"); */
 
 }
 
