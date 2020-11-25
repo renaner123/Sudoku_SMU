@@ -9,9 +9,29 @@ matrix =[[8,3,5,4,1,6,9,2,7], //vou receber uma matrix do back para manipular na
                     [9,8,1,3,4,5,2,7,6],
                     [3,7,4,9,6,2,8,1,5]];
 
+matrixAux =[[0,0,0,0,0,0,0,0,0], //vai receber uma cópia da matrix para quando precisar limpar
+[0,0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0,0],
+[30,0,0,0,0,0,0,0,0]];
+
 
 function clearBoard(){ //vai voltar pa matrix que o newBoard gerou
-    alert("Clear");
+
+    var cell = "";
+    var pos = 0;
+    for(var i =0;i<matrix.length;i++){
+        for(var y=0; y< matrix[0].length;y++){
+            cell = document.getElementById("cell-"+pos);
+            cell.value = matrixAux[i][y];    
+            pos++;
+        }
+    }
+
 };
 
 function newBoard(){ // joga matrix para interface, no caso, uma matrix para ser resolvida,
@@ -28,13 +48,14 @@ function newBoard(){ // joga matrix para interface, no caso, uma matrix para ser
         if ( xhttp.readyState == 4 && xhttp.status == 200 ) {//Verifica se o retorno do servidor deu certo      
             var obj = JSON.parse(xhttp.responseText);
             matrix = obj.gameBoard;  
+  
         }
     }
     xhttp.send(JSON.stringify({
         "dificulty": 0,
         "clientId" : "SuyKingsleigh"
     }));
-
+    matrixAux = matrix;
 
     var cell = "";
     var pos = 0;
@@ -45,12 +66,6 @@ function newBoard(){ // joga matrix para interface, no caso, uma matrix para ser
             pos++;
         }
     }
-
-
-
-
-
-
 
 };
 
@@ -76,18 +91,16 @@ for(var i =0;i<matrix.length;i++){ //recebe valores do front e insere na matriz 
             pos++;
         }
  }
- checkBoard(matrixCheck);
+return matrixCheck;
  
 };
 
-function checkBoard(args){ //Verificar se o que o usuário enviar no solve está correto
-   
+function checkBoard(){ //Verificar se o que o usuário enviar no solve está correto   
 
     var url = "http://localhost:42069/checkSolution";//Sua URL
 
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", url, true);
-    var validate = " ";
 
     xhttp.onreadystatechange = function(){//Função a ser chamada quando a requisição retornar do servidor
         if ( xhttp.readyState == 4 && xhttp.status == 200 ) {//Verifica se o retorno do servidor deu certo            
@@ -95,22 +108,12 @@ function checkBoard(args){ //Verificar se o que o usuário enviar no solve está
             (obj.win==false) ? alert("Try Gain") : alert("Gz");
         }
     }
-    xhttp.send(matrix);
+    var matrixSend = solve();
+    xhttp.send(JSON.stringify({
+        clientId: "SuyKingsleigh",
+        solved: matrixSend
+    }));
 
-    //var resObject = JSON.parse(request.responseText);
-
-    //(validate.win==false) ? alert("Try Gain") : alert("Gz"); 
-
-/*     for(var i =0;i<matrix.length;i++){ //recebe valores do front e insere na matriz para comparar com o gabarito
-            for(var y=0; y< matrix.length;y++){
-                if(matrix[i][y]==args[i][y]){
-                    continue;
-                }else{
-                     validate = false;
-                }
-            }
-     }
-     (validate==false) ? alert("Try Gain") : alert("Gz"); */
 
 }
 
