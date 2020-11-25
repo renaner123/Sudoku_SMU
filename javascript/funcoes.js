@@ -48,6 +48,17 @@ function newBoard(){ // joga matrix para interface, no caso, uma matrix para ser
         if ( xhttp.readyState == 4 && xhttp.status == 200 ) {//Verifica se o retorno do servidor deu certo      
             var obj = JSON.parse(xhttp.responseText);
             matrix = obj.gameBoard;  
+
+            var cell = "";
+            var pos = 0;
+            for(var i =0;i<matrix.length;i++){
+                for(var y=0; y< matrix[0].length;y++){
+                    cell = document.getElementById("cell-"+pos);
+                    cell.value = matrix[i][y];    
+                    pos++;
+                }
+            }
+            matrixAux = matrix;
   
         }
     }
@@ -55,17 +66,9 @@ function newBoard(){ // joga matrix para interface, no caso, uma matrix para ser
         "dificulty": 0,
         "clientId" : "SuyKingsleigh"
     }));
-    matrixAux = matrix;
 
-    var cell = "";
-    var pos = 0;
-    for(var i =0;i<matrix.length;i++){
-        for(var y=0; y< matrix[0].length;y++){
-            cell = document.getElementById("cell-"+pos);
-            cell.value = matrix[i][y];    
-            pos++;
-        }
-    }
+
+
 
 };
 
@@ -110,8 +113,8 @@ function checkBoard(){ //Verificar se o que o usuário enviar no solve está cor
     }
     var matrixSend = solve();
     xhttp.send(JSON.stringify({
-        clientId: "SuyKingsleigh",
-        solved: matrixSend
+        "clientId": "SuyKingsleigh",
+        "solved": matrixSend
     }));
 
 
