@@ -16,19 +16,40 @@ function clearBoard(){ //vai voltar pa matrix que o newBoard gerou
 
 function newBoard(){ // joga matrix para interface, no caso, uma matrix para ser resolvida,
 
-    var dificuldade = document.getElementById("cDifficulty");
+    var dificulty = document.getElementById("cDifficulty");
 
     
     var url = "http://localhost:42069/startNewGame";//Sua URL
 
     var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", url, true);
+    xhttp.open("POST", url, true);   
 
     xhttp.onreadystatechange = function(){//Função a ser chamada quando a requisição retornar do servidor
-        if ( xhttp.readyState == 4 && xhttp.status == 200 ) {//Verifica se o retorno do servidor deu certo            
+        if ( xhttp.readyState == 4 && xhttp.status == 200 ) {//Verifica se o retorno do servidor deu certo      
+            var obj = JSON.parse(xhttp.responseText);
+            matrix = obj.gameBoard;  
         }
     }
-    matrix = xhttp.send("dificuldade");
+    xhttp.send(JSON.stringify({
+        "dificulty": 0,
+        "clientId" : "SuyKingsleigh"
+    }));
+
+
+    var cell = "";
+    var pos = 0;
+    for(var i =0;i<matrix.length;i++){
+        for(var y=0; y< matrix[0].length;y++){
+            cell = document.getElementById("cell-"+pos);
+            cell.value = matrix[i][y];    
+            pos++;
+        }
+    }
+
+
+
+
+
 
 
 };
@@ -66,14 +87,19 @@ function checkBoard(args){ //Verificar se o que o usuário enviar no solve está
 
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", url, true);
+    var validate = " ";
 
     xhttp.onreadystatechange = function(){//Função a ser chamada quando a requisição retornar do servidor
         if ( xhttp.readyState == 4 && xhttp.status == 200 ) {//Verifica se o retorno do servidor deu certo            
+            var obj = JSON.parse(xhttp.responseText);
+            (obj.win==false) ? alert("Try Gain") : alert("Gz");
         }
     }
-    validate = xhttp.send(matrix);
+    xhttp.send(matrix);
 
-    (validate==false) ? alert("Try Gain") : alert("Gz"); */
+    //var resObject = JSON.parse(request.responseText);
+
+    //(validate.win==false) ? alert("Try Gain") : alert("Gz"); 
 
 /*     for(var i =0;i<matrix.length;i++){ //recebe valores do front e insere na matriz para comparar com o gabarito
             for(var y=0; y< matrix.length;y++){
