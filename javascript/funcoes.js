@@ -9,16 +9,7 @@ matrix =[[8,3,5,4,1,6,9,2,7], //vou receber uma matrix do back para manipular na
                     [9,8,1,3,4,5,2,7,6],
                     [3,7,4,9,6,2,8,1,5]];
 
-matrixAux =[[0,0,0,0,0,0,0,0,0], //vai receber uma cópia da matrix para quando precisar limpar
-[0,0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0,0],
-[30,0,0,0,0,0,0,0,0]];
-
+matrixAux =[9][9];
 
 function clearBoard(){ //vai voltar pa matrix que o newBoard gerou
 
@@ -31,7 +22,6 @@ function clearBoard(){ //vai voltar pa matrix que o newBoard gerou
             pos++;
         }
     }
-
 };
 
 function newBoard(){ // joga matrix para interface, no caso, uma matrix para ser resolvida,
@@ -43,6 +33,7 @@ function newBoard(){ // joga matrix para interface, no caso, uma matrix para ser
 
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", url, true);   
+    xhttp.setRequestHeader("Content-type", "application/json");
 
     xhttp.onreadystatechange = function(){//Função a ser chamada quando a requisição retornar do servidor
         if ( xhttp.readyState == 4 && xhttp.status == 200 ) {//Verifica se o retorno do servidor deu certo      
@@ -54,7 +45,14 @@ function newBoard(){ // joga matrix para interface, no caso, uma matrix para ser
             for(var i =0;i<matrix.length;i++){
                 for(var y=0; y< matrix[0].length;y++){
                     cell = document.getElementById("cell-"+pos);
-                    cell.value = matrix[i][y];    
+                    if(matrix[i][y]==0){
+                        cell.value = " ";   
+                        matrix[i][y] = "";
+                        document.getElementById("cell-"+pos).disabled=false;                                             
+                    }else{
+                        cell.value = matrix[i][y];     
+                        document.getElementById("cell-"+pos).disabled=true;
+                    } 
                     pos++;
                 }
             }
@@ -63,38 +61,27 @@ function newBoard(){ // joga matrix para interface, no caso, uma matrix para ser
         }
     }
     xhttp.send(JSON.stringify({
-        "dificulty": 0,
+        "dificulty": Number(dificulty.value),
         "clientId" : "SuyKingsleigh"
     }));
-
-
-
 
 };
 
 function solve(){ //envia a "matrix" que o usuário preencheu pra verificar com a matrix completa.
 
-var matrixCheck = [];
-matrixCheck =[[,,,,,,,,], 
-                    [,,,,,,,,],
-                    [,,,,,,,,],
-                    [,,,,,,,,],
-                    [,,,,,,,,],
-                    [,,,,,,,,],
-                    [,,,,,,,,],
-                    [,,,,,,,,],
-                    [,,,,,,,,]];
+var matrixCheck = new Array(9).fill(0).map(item =>(new Array(9).fill(0))) 
 
 var cell = "";
 var pos = 0;
-for(var i =0;i<matrix.length;i++){ //recebe valores do front e insere na matriz para comparar com o gabarito
-        for(var y=0; y< matrix.length;y++){
+for(var i =0;i<matrixCheck.length;i++){ //recebe valores do front e insere na matriz para comparar com o gabarito
+        for(var y=0; y< matrixCheck.length;y++){
             cell = document.getElementById("cell-"+pos);
-            matrixCheck[i][y]= cell.value;
+            matrixCheck[i][y]= Number(cell.value);
             pos++;
         }
  }
-return matrixCheck;
+
+return (matrixCheck);
  
 };
 
@@ -104,6 +91,7 @@ function checkBoard(){ //Verificar se o que o usuário enviar no solve está cor
 
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", url, true);
+    xhttp.setRequestHeader("Content-type", "application/json");
 
     xhttp.onreadystatechange = function(){//Função a ser chamada quando a requisição retornar do servidor
         if ( xhttp.readyState == 4 && xhttp.status == 200 ) {//Verifica se o retorno do servidor deu certo            
@@ -112,9 +100,11 @@ function checkBoard(){ //Verificar se o que o usuário enviar no solve está cor
         }
     }
     var matrixSend = solve();
+
     xhttp.send(JSON.stringify({
+        "solved": matrixSend,
         "clientId": "SuyKingsleigh",
-        "solved": matrixSend
+
     }));
 
 
