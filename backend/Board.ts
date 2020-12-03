@@ -47,7 +47,7 @@ export class Board {
 
     public getGameBoard() {
         let lineIndex = 0;
-        let board = this.board;
+        let board = JSON.parse(JSON.stringify(this.board));
         board.forEach(line => {
             let nToDelete = Math.floor(Math.random() * this.dificulty.min) + this.dificulty.max; // numero de elementos a deletar na linha
             let elIndex = 0.
@@ -56,7 +56,7 @@ export class Board {
             line.forEach(() => {
 
                 if (Math.random() > .5 && (deletedElements < nToDelete)) {
-                    this.board[lineIndex][elIndex] = 0;
+                    board[lineIndex][elIndex] = 0;
                     deletedElements++;
                 }
 
@@ -81,12 +81,12 @@ export class Board {
 
 }
 
-// let board = new Board();
-// console.log("----- Preenchido -----")
-// console.log(board.toString());
-//
-// console.log("----- Coisado -----")
-// console.log(board.matrixToString(board.getGameBoard()));
+let board = new Board();
+console.log("----- Preenchido -----")
+console.log(board.toString());
+
+console.log("----- Coisado -----")
+console.log(board.matrixToString(board.getGameBoard()));
 
 
 let a = [[1,2,3], [4,5,6]]

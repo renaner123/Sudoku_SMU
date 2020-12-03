@@ -7,7 +7,6 @@ app.use(bodyParser.json());
 
 
 const clientsBoards = {}
-
 app.use(cors());
 
 app.get("/teste", (req, res) => res.status(200).send("testado"))
@@ -40,10 +39,14 @@ app.post("/startNewGame", async (req, res) => {
  * resp={win: boolean}
  */
 app.post("/checkSolution", async (req, res) => {
+    let winResult = JSON.stringify(req.body.solved) == JSON.stringify(clientsBoards[req.body.clientId].solved);
+    if (winResult)
+        delete clientsBoards[req.body.clientId]
     res.status(200).send({
-        win: JSON.stringify(req.body.solved) == JSON.stringify(clientsBoards[req.body.clientId].solved)
-    })
+        win: winResult
+    });
 })
 
 
 const server = app.listen(42069, '0.0.0.0');
+console.log("Server is running! :D")
