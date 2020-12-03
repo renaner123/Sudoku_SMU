@@ -12,7 +12,6 @@ app.use(cors());
 
 app.get("/teste", (req, res) => res.status(200).send("testado"))
 
-
 /**
  * body={
  *     dificulty: number (0 a 4)
@@ -23,13 +22,11 @@ app.get("/teste", (req, res) => res.status(200).send("testado"))
  */
 app.post("/startNewGame", async (req, res) => {
     let board = new Board(req.body.dificulty);
-
     // armazena o q eh enviado e a resolucao
     clientsBoards[req.body.clientId] = {
         gameBoard: board.getGameBoard(),
         solved: board.board
     }
-
     res.status(200).send({gameBoard: clientsBoards[req.body.clientId].gameBoard});
 
 });
