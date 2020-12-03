@@ -25,4 +25,4 @@ Caso encontre algum erro na hora da compilação/execução do server.ts, pode s
 * cors  
 * express
 * node-typescript
-* @types/node
+* @types/node ->  npm i --save-dev @types/node
