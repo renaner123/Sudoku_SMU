@@ -9,39 +9,29 @@ app.use(bodyParser.json());
 const clientsBoards = {}
 app.use(cors());
 
+// @ts-ignore
 app.get("/teste", (req, res) => res.status(200).send("testado"))
 
-/**
- * body={
- *     dificulty: number (0 a 4)
- *     clientId: algumaCoisaAleatoriaSeiLa
- * }
- *
- * response={gameBoard: number[][]}
- */
-app.post("/startNewGame", async (req, res) => {
+app.post("/startNewGame", async (req: { body: { dificulty: number | undefined; clientId: string | number; }; }, res: { status: (arg0: number) => { (): any; new(): any; send: { (arg0: { gameBoard: any; }): void; new(): any; }; }; }) => {
     let board = new Board(req.body.dificulty);
     // armazena o q eh enviado e a resolucao
+    // @ts-ignore
     clientsBoards[req.body.clientId] = {
         gameBoard: board.getGameBoard(),
         solved: board.board
     }
+    // @ts-ignore
     res.status(200).send({gameBoard: clientsBoards[req.body.clientId].gameBoard});
 
 });
 
-/**
- * body{
- *     solved: number[][]
- *     clientId: seiLaManin
- * }
- *
- * resp={win: boolean}
- */
-app.post("/checkSolution", async (req, res) => {
+app.post("/checkSolution", async (req: { body: { solved: any; clientId: string | number; }; }, res: { status: (arg0: number) => { (): any; new(): any; send: { (arg0: { win: boolean; }): void; new(): any; }; }; }) => {
+    // @ts-ignore
     let winResult = JSON.stringify(req.body.solved) == JSON.stringify(clientsBoards[req.body.clientId].solved);
-    if (winResult)
+    if (winResult) { // @ts-ignore
+        // @ts-ignore
         delete clientsBoards[req.body.clientId]
+    }
     res.status(200).send({
         win: winResult
     });

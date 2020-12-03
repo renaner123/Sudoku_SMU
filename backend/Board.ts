@@ -23,6 +23,7 @@ enum DificultyLevel {
 
 export class Board {
     public board: number[][];
+    // @ts-ignore
     private dificulty: {
         max: number;
         min: number;
@@ -48,6 +49,7 @@ export class Board {
     public getGameBoard() {
         let lineIndex = 0;
         let board = JSON.parse(JSON.stringify(this.board));
+        // @ts-ignore
         board.forEach(line => {
             let nToDelete = Math.floor(Math.random() * this.dificulty.min) + this.dificulty.max; // numero de elementos a deletar na linha
             let elIndex = 0.
@@ -72,8 +74,10 @@ export class Board {
         return this.matrixToString(this.board);
     }
 
+    // @ts-ignore
     public matrixToString(board) {
         let str = "";
+        // @ts-ignore
         board.forEach(line => str += line.toString() + "\n");
         return str;
     }
@@ -89,7 +93,7 @@ console.log("----- Coisado -----")
 console.log(board.matrixToString(board.getGameBoard()));
 
 
-let a = [[1,2,3], [4,5,6]]
-let b = [[1,2,3], [4,5,7]]
+let a = [[1, 2, 3], [4, 5, 6]]
+let b = [[1, 2, 3], [4, 5, 7]]
 
 console.log(JSON.stringify(a) == JSON.stringify(b))
