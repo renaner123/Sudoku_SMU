@@ -11,7 +11,6 @@ const clientsBoards = {}
 app.use(cors());
 
 app.get("/teste", (req, res) => res.status(200).send("testado"))
-
 /**
  * body={
  *     dificulty: number (0 a 4)
@@ -28,7 +27,6 @@ app.post("/startNewGame", async (req, res) => {
         solved: board.board
     }
     res.status(200).send({gameBoard: clientsBoards[req.body.clientId].gameBoard});
-
 });
 
 /**
