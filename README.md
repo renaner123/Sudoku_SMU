@@ -7,10 +7,10 @@
 
 ## Execução
 
-Antes de iniciar a execução, deve-se instalar as dependências que se encontram no arquivo package.json. Um exemplo de instalação é através do npm conforme abaixo.
+Antes de iniciar a execução, deve-se instalar as dependências que se encontram no arquivo package.json dentro da pasta backend. Um exemplo de instalação é através do npm conforme abaixo.
 
 ```
-    npm i
+    npm i ou yarn
 ```
 
 Para iniciar a aplicação é necessário compilar/executar o arquivo server.ts que se que se encontra dentro da pasta backend, e logo em seguida abrir o arquivo index.html. 
