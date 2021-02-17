@@ -18,7 +18,7 @@ Para iniciar a aplicação é necessário compilar/executar o arquivo server.ts 
 Por terminal o arquivo ts pode ser compilado com stc para gerar um arquivo js da seguinte forma:
 
 ```shell
-    stc server.ts
+    tsc server.ts
     node server.js
 ```
 Ou se prefeir pode usar npx
