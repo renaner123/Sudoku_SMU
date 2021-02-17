@@ -1,7 +1,7 @@
 ### Instalação e compilação do Asterisk foi conforme tutorial do site:
 > https://linuxize.com/post/how-to-install-asterisk-on-ubuntu-18-04/
 
-Foi usado a configuração genérica basica-pbs
+Foi usado a configuração genérica basic-pbx
 
 * sudo make basic-pbx
 * sudo make config
