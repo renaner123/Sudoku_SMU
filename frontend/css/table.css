@@ -36,6 +36,7 @@ aside#lateral {
   background-color: white;
   padding: 10px;
   margin-top: -450px;
+  
 }
 
 div#timer {
@@ -283,7 +284,7 @@ button#newBoard {
 
 
 
-/*** COMPONENT STYLES ***/
+/*** COMPONENT STYLES  CHAT ***/
 input.chat[type=submit], button.chat, button.green {
   background-color: #35f659;
   border: 0px;
@@ -294,6 +295,13 @@ input.chat[type=submit], button.chat, button.green {
  
 }
 
+input#ua-uri[type=text], input.chat[type=password] {
+  min-width: 90%;
+  font-size: 12px;
+  border-radius: 2px;
+  border: 0px;
+  height: 3em;
+}
 
 
 input.chat[type=text], input.chat[type=password] {
@@ -309,6 +317,24 @@ label.chat{
   display: block;
   text-align: right;
   margin:left;
+}
+
+
+div#ua{
+  width: auto;
+  align-items: center;
+  margin-left: auto;
+}
+
+div#ua2{
+  width: 350px;
+  align-items: center;
+  margin-left: auto;
+}
+
+h2#display_name{
+  font-size: 15px;
+  text-align: center;
 }
 
 ul.messages, li.templatesession {
@@ -344,6 +370,7 @@ h1 {
   width: 45%;
   margin: 0 0 0 4%;
 }
+
 
 .session {
   clear: both;

@@ -179,10 +179,6 @@
 
 
 
-
-
-
-
           <!-- Configuration Prompt -->
           <form id="config-form" action="">
             <label class="chat">Your Name     <input class="chat" type="text" name="displayName" placeholder="John Doe"/></label>
@@ -198,33 +194,36 @@
             <div class="chat" id="ua-status">Disconnected</div>
             <button class="chat"  id="ua-register">Register</button>
             <form id="new-session-form" action="">
-              <label class="chat" ></label>>Enable Video <input class="chat"  type="checkbox" id="ua-video" checked/></label>
-              <label class="chat" ></label>>SIP URI      <input class="chat" type="text" id="ua-uri" placeholder="will@example.com"/></label>
+              <!-- <label class="chat" ></label>>Enable Video <input class="chat"  type="checkbox" id="ua-video"/></label> -->
+              <label class="chat" ></label>>SIP URI      <input type="text" id="ua-uri" placeholder="will@example.com"/></label>
               <input class="chat"  type="submit" id="ua-invite-submit" value="Invite" />
               <input class="chat" type="submit" id="ua-message-submit" value="Begin Chat" />
             </form>
           </div>
 
-          <ul id="session-list"></ul>
-
+ 
 
           <!-- Templates to clone Sessions and Messages -->
-          <ul class="chat" id="templates">
-            <li id="session-template" class="templatesession">
-              <h2><strong class="display-name"></strong> <span class="uri"></span></h2>
-              <button class="green">Green</button>
-              <button class="red">Red</button>
-              <form action="">
-                <label class="chat" >DTMF <input type="text" maxlength="1" /></label>
-                <input class="chat" type="submit" value="Send" />
-              </form>
-              <video autoplay>Video Disabled or Unavailable</video>
-              <ul class="messages"></ul>
-              <form class="message-form" action="">
-                <input class="chat" type="text" placeholder="Type to send a message"/><input type="submit" value="Send" />
-              </form>
-            </li>
-          </ul>
+          <div id="ua2">
+            <ul id="session-list"></ul>
+            <ul class="chat" id="templates">
+              <li id="session-template" class="templatesession">
+                <h2 id="display_name"><strong class="display-name"></strong> <span class="uri"></span></h2>
+                <button class="green">Green</button>
+                <button class="red">Red</button>
+<!--                 <form action="">
+                  <label class="chat" >DTMF <input type="text" maxlength="1" /></label> 
+                  <input class="chat" type="submit" value="Send" />
+                </form> -->
+                <!-- <video autoplay>Video Disabled or Unavailable</video> -->
+                <ul class="messages"></ul>
+                <form class="message-form" action="">
+                  <input class="chat" type="text" placeholder="Type to send a message"/><input class="chat" type="submit" value="Send" />
+                </form>
+              </li>
+            </ul>
+          </div>
+
           <script src="frontend/javascript/sip-0.5.0.js"></script>
           <script src="frontend/javascript/ua.js"></script>
         </aside>

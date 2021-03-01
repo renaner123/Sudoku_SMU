@@ -82,7 +82,7 @@ function inviteSubmit(e) {
   e.stopPropagation();
 
   // Parse config options
-  var video = elements.uaVideo.checked;
+  //var video = elements.uaVideo.checked;
   var uri = elements.uaURI.value;
   elements.uaURI.value = '';
   
@@ -92,7 +92,7 @@ function inviteSubmit(e) {
   var session = ua.invite(uri, {
     mediaConstraints: {
       audio: true,
-      video: video
+      //video: video
     }
   });
 
@@ -132,9 +132,9 @@ function createNewSessionUI(uri, session, message) {
   sessionUI.uri            = node.querySelector('.uri');
   sessionUI.green          = node.querySelector('.green');
   sessionUI.red            = node.querySelector('.red');
-  sessionUI.dtmf           = node.querySelector('.dtmf');
-  sessionUI.dtmfInput      = node.querySelector('.dtmf input[type="text"]');
-  sessionUI.video          = node.querySelector('video');
+  //sessionUI.dtmf           = node.querySelector('.dtmf');
+  //sessionUI.dtmfInput      = node.querySelector('.dtmf input[type="text"]');
+  //sessionUI.video          = node.querySelector('video');
   sessionUI.messages       = node.querySelector('.messages');
   sessionUI.messageForm    = node.querySelector('.message-form');
   sessionUI.messageInput   = node.querySelector('.message-form input[type="text"]');
@@ -155,7 +155,7 @@ function createNewSessionUI(uri, session, message) {
       session = sessionUI.session = ua.invite(uri, {
         mediaConstraints: {
           audio: true,
-          video: elements.uaVideo.checked
+          //video: elements.uaVideo.checked
         }
       });
 
@@ -164,7 +164,7 @@ function createNewSessionUI(uri, session, message) {
       session.accept({
         mediaConstraints: {
           audio: true,
-          video: elements.uaVideo.checked
+          //video: elements.uaVideo.checked
         }
       });
     }
@@ -183,7 +183,7 @@ function createNewSessionUI(uri, session, message) {
     }
   }, false);
 
-  sessionUI.dtmf.addEventListener('submit', function (e) {
+/*   sessionUI.dtmf.addEventListener('submit', function (e) {
     e.preventDefault();
 
     var value = sessionUI.dtmfInput.value;
@@ -194,7 +194,7 @@ function createNewSessionUI(uri, session, message) {
     if (['0','1','2','3','4','5','6','7','8','9','*','#'].indexOf(value) > -1) {
       session.dtmf(value);
     }
-  });
+  }); */
 
   // Initial DOM state
   if (session && !session.accept) {
@@ -209,7 +209,7 @@ function createNewSessionUI(uri, session, message) {
     sessionUI.green.innerHTML = 'Accept';
     sessionUI.red.innerHTML = 'Reject';
   }
-  sessionUI.dtmfInput.disabled = true;
+  //sessionUI.dtmfInput.disabled = true;
 
   // SIP.js event listeners
   function setUpListeners(session) {
@@ -228,11 +228,11 @@ function createNewSessionUI(uri, session, message) {
       sessionUI.green.disabled = true;
       sessionUI.green.innerHTML = '...';
       sessionUI.red.innerHTML = 'Bye';
-      sessionUI.dtmfInput.disabled = false;
-      sessionUI.video.className = 'on';
+      //sessionUI.dtmfInput.disabled = false;
+      //sessionUI.video.className = 'on';
 
-      var element = sessionUI.video;
-      var stream = this.mediaHandler.getRemoteStreams()[0];
+      //var element = sessionUI.video;
+/*        var stream = this.mediaHandler.getRemoteStreams()[0];
 
       if (typeof element.srcObject !== 'undefined') {
         element.srcObject = stream;
@@ -242,26 +242,27 @@ function createNewSessionUI(uri, session, message) {
         element.src = URL.createObjectURL(stream);
       } else {
         console.log('Error attaching stream to element.');
-      }
-    });
+      } */
+
+    }); 
 
     session.on('bye', function () {
       sessionUI.green.disabled = false;
       sessionUI.red.disabled = true;
-      sessionUI.dtmfInput.disable = true;
+      //sessionUI.dtmfInput.disable = true;
       sessionUI.green.innerHTML = 'Invite';
       sessionUI.red.innerHTML = '...';
-      sessionUI.video.className = '';
+      //sessionUI.video.className = '';
       delete sessionUI.session;
     });
 
     session.on('failed', function () {
       sessionUI.green.disabled = false;
       sessionUI.red.disabled = true;
-      sessionUI.dtmfInput.disable = true;
+      //sessionUI.dtmfInput.disable = true;
       sessionUI.green.innerHTML = 'Invite';
       sessionUI.red.innerHTML = '...';
-      sessionUI.video.className = '';
+      //sessionUI.video.className = '';
       delete sessionUI.session;
     });
 
@@ -271,7 +272,7 @@ function createNewSessionUI(uri, session, message) {
       createNewSessionUI(target, ua.invite(target, {
         mediaConstraints: {
           audio: true,
-          video: elements.uaVideo.checked
+          //video: elements.uaVideo.checked
         }
       }));
     });
