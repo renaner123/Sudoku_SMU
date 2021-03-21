@@ -69,3 +69,18 @@ rp({
 }).catch(function (err) {
     console.log("Body: " + err);
 });
+
+
+rp({
+    method: 'POST',
+    uri: 'http://localhost:42069/listUri',
+    body: {
+        uri: uri,
+        clientId: "SuyKingsleigh"
+    },
+    json: true // Automatically stringifies the body to JSON
+}).then(function (parsedBody) {
+    console.log(parsedBody);
+}).catch(function (err) {
+    console.log("Body: " + err);
+});

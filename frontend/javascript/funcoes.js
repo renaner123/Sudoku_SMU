@@ -110,13 +110,25 @@ function checkBoard(){ //Verificar se o que o usuário enviar no solve está cor
 
 }
 
-function webRtc(){
-    var peer = new Peer(); 
-    var conn = peer.connect('another-peers-id');
-    // on open will be launch when you successfully connect to PeerServer
-    conn.on('open', function(){
-    // here you have conn.id
-    conn.send('hi!');
-    });
-}
+function listUri(){
 
+    var url = "http://localhost:42069/listUri";//Sua URL
+    var uri = document.getElementById('config-form');
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", url, true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+
+    xhttp.onreadystatechange = function(){//Função a ser chamada quando a requisição retornar do servidor
+        if ( xhttp.readyState == 4 && xhttp.status == 200 ) {//Verifica se o retorno do servidor deu certo            
+            var obj = JSON.parse(xhttp.responseText);
+            alert(xhttp.responseText);
+        }
+    }
+
+    xhttp.send(JSON.stringify({
+        "uri": uri.uri.value,
+        "clientId": "SuyKingsleigh",
+    }));
+
+}

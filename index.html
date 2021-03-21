@@ -182,7 +182,7 @@
           <!-- Configuration Prompt -->
           <form id="config-form" action="">
             <label class="chat">Your Name     <input class="chat" type="text" name="displayName" placeholder="John Doe"/></label>
-            <label class="chat">SIP URI       <input class="chat" type="text" name="uri" placeholder="john@example.com"/></label>
+            <label class="chat">SIP URI       <input class="chat" type="text" id = "uri_ua" name="uri" placeholder="john@example.com"/></label>
             <label class="chat">Auth Username <input class="chat" type="text" name="authorizationUser" placeholder="example_john"/></label>
             <label class="chat">Password      <input class="chat" type="password" name="password" /></label>
             <label class="chat">WS Server     <input class="chat"  type="text" name="wsServers" placeholder="wss://edge.sip.onsip.com"/></label>
@@ -198,6 +198,7 @@
               <label class="chat" ></label>>SIP URI      <input type="text" id="ua-uri" placeholder="will@example.com"/></label>
               <input class="chat"  type="submit" id="ua-invite-submit" value="Invite" />
               <input class="chat" type="submit" id="ua-message-submit" value="Begin Chat" />
+              <input class="chat" onclick="listUri()" type="submit" id="ua-message-list" value="List registered" />
             </form>
           </div>
 

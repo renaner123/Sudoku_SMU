@@ -5,6 +5,7 @@ const cors = require('cors')
 const app = express();
 app.use(bodyParser.json());
 
+var listUri = [];
 
 const clientsBoards = {}
 app.use(cors());
@@ -42,6 +43,16 @@ app.post("/checkSolution", async (req: { body: { solved: any; clientId: string |
         win: winResult
     });
 })
+
+
+app.post("/listUri", async (req, res) => {
+    console.log(req.body.uri);
+    if(listUri.indexOf(req.body.uri) == -1){
+        listUri.push(req.body.uri)
+    }
+    // @ts-ignore
+    res.status(200).send(JSON.stringify(listUri));
+});
 
 
 const server = app.listen(42069, '0.0.0.0');
