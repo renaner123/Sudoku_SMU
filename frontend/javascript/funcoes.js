@@ -29,7 +29,7 @@ function newBoard(){ // joga matrix para interface, no caso, uma matrix para ser
     var dificulty = document.getElementById("cDifficulty");
 
     
-    var url = "http://localhost:42069/startNewGame";//Sua URL
+    var url = "http://localhost:8080/startNewGame";//Sua URL
 
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", url, true);   
@@ -87,7 +87,7 @@ return (matrixCheck);
 
 function checkBoard(){ //Verificar se o que o usuário enviar no solve está correto   
 
-    var url = "http://localhost:42069/checkSolution";//Sua URL
+    var url = "http://localhost:8080/checkSolution";//Sua URL
 
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", url, true);
@@ -112,7 +112,7 @@ function checkBoard(){ //Verificar se o que o usuário enviar no solve está cor
 
 function listUri(){
 
-    var url = "http://localhost:42069/listUri";//Sua URL
+    var url = "http://localhost:8080/listUri";//Sua URL
     var uri = document.getElementById('config-form');
 
     var xhttp = new XMLHttpRequest();
