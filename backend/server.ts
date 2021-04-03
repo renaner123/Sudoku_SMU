@@ -1,6 +1,8 @@
 import {Board} from "./Board";
 
+
 const express = require('express'), bodyParser = require('body-parser');
+const path = require('path')
 const cors = require('cors')
 const app = express();
 app.use(bodyParser.json());
@@ -9,6 +11,13 @@ var listUri = [];
 
 const clientsBoards = {}
 app.use(cors());
+
+app.use(express.static(path.join(__dirname, '../frontend')))
+
+app.get('/', function(req, res){
+    res.sendFile(path.join(__dirname + '/index.html'));
+});
+
 
 // @ts-ignore
 app.get("/teste", (req, res) => res.status(200).send("testado"))
@@ -43,7 +52,6 @@ app.post("/checkSolution", async (req: { body: { solved: any; clientId: string |
         win: winResult
     });
 })
-
 
 app.post("/listUri", async (req, res) => {
     console.log(req.body.uri);

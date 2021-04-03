@@ -1,6 +1,5 @@
 "use strict";
 exports.__esModule = true;
-exports.Board = void 0;
 var BASE_MATRIX = [
     [1, 2, 3, 4, 5, 6, 7, 8, 9],
     [4, 5, 6, 7, 8, 9, 1, 2, 3],
@@ -22,8 +21,8 @@ var DificultyLevel;
 })(DificultyLevel || (DificultyLevel = {}));
 var Board = /** @class */ (function () {
     function Board(dificulty) {
-        var _this = this;
         if (dificulty === void 0) { dificulty = DificultyLevel.EASY; }
+        var _this = this;
         this.board = [];
         ZONA_INDEX.forEach(function (zone) {
             zone.sort(function () { return .5 - Math.random(); });
@@ -72,10 +71,11 @@ var Board = /** @class */ (function () {
 }());
 exports.Board = Board;
 var board = new Board();
-console.log("----- Preenchido -----");
+/* console.log("----- Preenchido -----")
 console.log(board.toString());
-console.log("----- Coisado -----");
-console.log(board.matrixToString(board.getGameBoard()));
+
+console.log("----- Coisado -----")
+console.log(board.matrixToString(board.getGameBoard())); */
 var a = [[1, 2, 3], [4, 5, 6]];
 var b = [[1, 2, 3], [4, 5, 7]];
-console.log(JSON.stringify(a) == JSON.stringify(b));
+//console.log(JSON.stringify(a) == JSON.stringify(b))
