@@ -63,5 +63,7 @@ app.post("/listUri", async (req, res) => {
 });
 
 
-const server = app.listen(42069, '0.0.0.0');
+var porta = process.env.PORT || 8080;
+app.listen(porta);
+
 console.log("Server is running! :D")
