@@ -27,17 +27,19 @@ input {
 
 input:disabled {
   background-color: white;
+
 }
 
 aside#lateral {
   display: block;
-  width: auto;
   float: right;
   background-color: white;
   padding: 10px;
   margin-top: -450px;
+  margin-left: 10em;
   
 }
+
 
 div#timer {
   margin-top: 80px;

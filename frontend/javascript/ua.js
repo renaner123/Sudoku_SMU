@@ -9,13 +9,15 @@ var elements = {
   uaURI:           document.getElementById('ua-uri'),
   sessionList:     document.getElementById('session-list'),
   sessionTemplate: document.getElementById('session-template'),
-  messageTemplate: document.getElementById('message-template')
+  messageTemplate: document.getElementById('message-template'),
 };
+
+listnames = [];
 
 var config = {
   userAgentString: 'SIP.js/0.5.0-devel BB',
   traceSip: true,
-  register: false
+  register: false,
 };
 
 var ua;
@@ -42,11 +44,13 @@ elements.configForm.addEventListener('submit', function (e) {
 
   ua.on('connected', function () {
     elements.uaStatus.innerHTML = 'Connected (Unregistered)';
+    
   });
 
   ua.on('registered', function () {
     elements.registerButton.innerHTML = 'Unregister';
     elements.uaStatus.innerHTML = 'Connected (Registered)';
+
   });
 
   ua.on('unregistered', function () {
@@ -77,6 +81,8 @@ elements.registerButton.addEventListener('click', function () {
   }
 }, false);
 
+
+
 function inviteSubmit(e) {
   e.preventDefault();
   e.stopPropagation();
@@ -88,12 +94,23 @@ function inviteSubmit(e) {
   
   if (!uri) return;
 
+/*
+    sessionDescriptionHandlerOptions: {
+      constraints: {
+        audio: true,
+        video: false
+        }
+      },    
+*/
+
   // Send invite
   var session = ua.invite(uri, {
     mediaConstraints: {
       audio: true,
-      //video: video
-    }
+      video: true
+      
+    }, 
+
   });
 
   // Create new Session and append it to list
@@ -155,7 +172,8 @@ function createNewSessionUI(uri, session, message) {
       session = sessionUI.session = ua.invite(uri, {
         mediaConstraints: {
           audio: true,
-          //video: elements.uaVideo.checked
+          video: true,
+          video: elements.uaVideo.checked
         }
       });
 
@@ -164,7 +182,8 @@ function createNewSessionUI(uri, session, message) {
       session.accept({
         mediaConstraints: {
           audio: true,
-          //video: elements.uaVideo.checked
+          video: true,
+          video: elements.uaVideo.checked
         }
       });
     }
@@ -229,10 +248,10 @@ function createNewSessionUI(uri, session, message) {
       sessionUI.green.innerHTML = '...';
       sessionUI.red.innerHTML = 'Bye';
       //sessionUI.dtmfInput.disabled = false;
-      //sessionUI.video.className = 'on';
+      sessionUI.video.className = 'on';
 
-      //var element = sessionUI.video;
-/*        var stream = this.mediaHandler.getRemoteStreams()[0];
+      var element = sessionUI.video;
+      var stream = this.mediaHandler.getRemoteStreams()[0];
 
       if (typeof element.srcObject !== 'undefined') {
         element.srcObject = stream;
@@ -242,7 +261,7 @@ function createNewSessionUI(uri, session, message) {
         element.src = URL.createObjectURL(stream);
       } else {
         console.log('Error attaching stream to element.');
-      } */
+      } 
 
     }); 
 
@@ -252,7 +271,7 @@ function createNewSessionUI(uri, session, message) {
       //sessionUI.dtmfInput.disable = true;
       sessionUI.green.innerHTML = 'Invite';
       sessionUI.red.innerHTML = '...';
-      //sessionUI.video.className = '';
+      sessionUI.video.className = '';
       delete sessionUI.session;
     });
 
@@ -262,7 +281,7 @@ function createNewSessionUI(uri, session, message) {
       //sessionUI.dtmfInput.disable = true;
       sessionUI.green.innerHTML = 'Invite';
       sessionUI.red.innerHTML = '...';
-      //sessionUI.video.className = '';
+      sessionUI.video.className = '';
       delete sessionUI.session;
     });
 
@@ -298,13 +317,23 @@ function createNewSessionUI(uri, session, message) {
     if (message.remoteIdentity.uri !== uri) {
       console.warn('unmatched message: ', message.remoteIdentity.uri, uri);
     }
-
     appendMessage(message.body, 'remote');
   });
 
   sessionUI.messageForm.addEventListener('submit', function (e) {
     e.preventDefault();
+    var body = sessionUI.messageInput.value;
+    sessionUI.messageInput.value = '';
 
+
+
+
+    alert()
+
+
+
+
+/*     alert("oi")
     var body = sessionUI.messageInput.value;
     sessionUI.messageInput.value = '';
 
@@ -312,7 +341,7 @@ function createNewSessionUI(uri, session, message) {
       appendMessage('Error sending message: ' + (cause || 'Unknown Error'), 'error');
     });
 
-    appendMessage(body, 'local');
+    appendMessage(body, 'local'); */
   }, false);
 
   // Add node to live session list

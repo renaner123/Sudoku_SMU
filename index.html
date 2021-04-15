@@ -34,6 +34,8 @@
         <option value="3" >Very-Hard</option>    
       </select>
 
+      <audio>audioElement</audio>
+
       <section id="board">
         <table id="grid">
 
@@ -194,7 +196,7 @@
             <div class="chat" id="ua-status">Disconnected</div>
             <button class="chat"  id="ua-register">Register</button>
             <form id="new-session-form" action="">
-              <!-- <label class="chat" ></label>>Enable Video <input class="chat"  type="checkbox" id="ua-video"/></label> -->
+              <label class="chat" ></label>>Enable Video <input class="chat"  type="checkbox" id="ua-video"/></label>
               <label class="chat" ></label>>SIP URI      <input type="text" id="ua-uri" placeholder="will@example.com"/></label>
               <input class="chat"  type="submit" id="ua-invite-submit" value="Invite" />
               <input class="chat" type="submit" id="ua-message-submit" value="Begin Chat" />
@@ -216,7 +218,7 @@
                   <label class="chat" >DTMF <input type="text" maxlength="1" /></label> 
                   <input class="chat" type="submit" value="Send" />
                 </form> -->
-                <!-- <video autoplay>Video Disabled or Unavailable</video> -->
+                <video autoplay>Video Disabled or Unavailable</video>
                 <ul class="messages"></ul>
                 <form class="message-form" action="">
                   <input class="chat" type="text" placeholder="Type to send a message"/><input class="chat" type="submit" value="Send" />

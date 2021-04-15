@@ -72,10 +72,11 @@ var Board = /** @class */ (function () {
 }());
 exports.Board = Board;
 var board = new Board();
-console.log("----- Preenchido -----");
+/* console.log("----- Preenchido -----")
 console.log(board.toString());
-console.log("----- Coisado -----");
-console.log(board.matrixToString(board.getGameBoard()));
+
+console.log("----- Coisado -----")
+console.log(board.matrixToString(board.getGameBoard())); */
 var a = [[1, 2, 3], [4, 5, 6]];
 var b = [[1, 2, 3], [4, 5, 7]];
-console.log(JSON.stringify(a) == JSON.stringify(b));
+//console.log(JSON.stringify(a) == JSON.stringify(b))
