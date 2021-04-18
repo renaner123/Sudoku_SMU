@@ -4,6 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "build": "npm install",
+    "installdemo": "npm --prefix ./libs/SIP.js-master/demo/ install ./libs/SIP.js-master/demo/",
     "dev": "nodemon backend/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
