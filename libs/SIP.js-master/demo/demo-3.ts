@@ -95,7 +95,7 @@ function buildUser(
     media: {
       constraints: {
         // This demo is making "video only" calls
-        audio: false,
+        audio: true,
         video: true
       },
       local: {
