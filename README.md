@@ -7,7 +7,7 @@
 
 ## Execução
 
-Antes de iniciar a aplicação, deve-se instalar as dependências do backend e das bilbiotecas utilizadas. Para isso, roda o ser executado o script build.sh.
+Antes de iniciar a aplicação, deve-se instalar as dependências do backend e das bilbiotecas utilizadas. Para isso, deve-se executar o script build.sh com permissões.
 
 ```
     chmod +x build.sh
