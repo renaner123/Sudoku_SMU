@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "build": "npm install",
-    "installdemo": "npm --prefix ./libs/SIP.js-master/demo/ install ./libs/SIP.js-master/demo/",
+    "installdemo": "npm --prefix ../libs/SIP.js-master/ install ../libs/SIP.js-master/",
     "dev": "nodemon backend/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
