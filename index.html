@@ -176,66 +176,7 @@
          <button onclick="clearBoard(),stop()" id="clear">Clear</button>
          <button onclick="checkBoard(),stop()" id="solve">Solve</button>
 
-
-        <aside  id="lateral">
-
-
-
-          <!-- Configuration Prompt -->
-          <form id="config-form" action="">
-            <label class="chat">Your Name     <input class="chat" type="text" name="displayName" placeholder="John Doe"/></label>
-            <label class="chat">SIP URI       <input class="chat" type="text" id = "uri_ua" name="uri" placeholder="john@example.com"/></label>
-            <label class="chat">Auth Username <input class="chat" type="text" name="authorizationUser" placeholder="example_john"/></label>
-            <label class="chat">Password      <input class="chat" type="password" name="password" /></label>
-            <label class="chat">WS Server     <input class="chat"  type="text" name="wsServers" placeholder="wss://edge.sip.onsip.com"/></label>
-            <input class="chat"  type="submit" name="configSubmit" value="Create UA" />
-          </form>
-
-          <!-- UA Control Form -->
-          <div id="ua">
-            <div class="chat" id="ua-status">Disconnected</div>
-            <button class="chat"  id="ua-register">Register</button>
-            <form id="new-session-form" action="">
-              <label class="chat" ></label>>Enable Video <input class="chat"  type="checkbox" id="ua-video"/></label>
-              <label class="chat" ></label>>SIP URI      <input type="text" id="ua-uri" placeholder="will@example.com"/></label>
-              <input class="chat"  type="submit" id="ua-invite-submit" value="Invite" />
-              <input class="chat" type="submit" id="ua-message-submit" value="Begin Chat" />
-              <input class="chat" onclick="listUri()" type="submit" id="ua-message-list" value="List registered" />
-            </form>
-          </div>
-
- 
-
-          <!-- Templates to clone Sessions and Messages -->
-          <div id="ua2">
-            <ul id="session-list"></ul>
-            <ul class="chat" id="templates">
-              <li id="session-template" class="templatesession">
-                <h2 id="display_name"><strong class="display-name"></strong> <span class="uri"></span></h2>
-                <button class="green">Green</button>
-                <button class="red">Red</button>
-<!--                 <form action="">
-                  <label class="chat" >DTMF <input type="text" maxlength="1" /></label> 
-                  <input class="chat" type="submit" value="Send" />
-                </form> -->
-                <video autoplay>Video Disabled or Unavailable</video>
-                <ul class="messages"></ul>
-                <form class="message-form" action="">
-                  <input class="chat" type="text" placeholder="Type to send a message"/><input class="chat" type="submit" value="Send" />
-                </form>
-              </li>
-            </ul>
-          </div>
-
-          <script src="frontend/javascript/sip-0.5.0.js"></script>
-          <script src="frontend/javascript/ua.js"></script>
-        </aside>
-
-
-
-
-
-
+      
 
         <footer id="rodape"><p> SMU </br>
           <a href="https://github.com/" target="_blank">GitHub</a> |  

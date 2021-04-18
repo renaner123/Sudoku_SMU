@@ -3,12 +3,30 @@ import {Board} from "./Board";
 const express = require('express'), bodyParser = require('body-parser');
 const cors = require('cors')
 const app = express();
+const path = require('path')
 app.use(bodyParser.json());
 
 var listUri = [];
 
 const clientsBoards = {}
 app.use(cors());
+
+
+app.use(express.static(path.join(__dirname, '../')))
+
+
+app.get('/', function(req, res){
+    res.sendFile(path.join(__dirname + '/index.html'));
+});
+
+app.get('/user1', function(req, res){
+    res.sendFile('user1.html', { root: path.join(__dirname, '../frontend', 'html') });
+});
+
+app.get('/user2', function(req, res){
+    res.sendFile('user2.html', { root: path.join(__dirname, '../frontend', 'html') });
+});
+
 
 // @ts-ignore
 app.get("/teste", (req, res) => res.status(200).send("testado"))
