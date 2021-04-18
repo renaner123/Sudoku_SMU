@@ -1,7 +1,7 @@
 
 # Created by https://www.toptal.com/developers/gitignore/api/linux,windows
 # Edit at https://www.toptal.com/developers/gitignore?templates=linux,windows
-
+/node_modules
 ### Linux ###
 *~
 

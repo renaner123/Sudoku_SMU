@@ -45,7 +45,7 @@ app.use(bodyParser.json());
 var listUri = [];
 var clientsBoards = {};
 app.use(cors());
-app.use(express.static(path.join(__dirname, '../frontend')));
+app.use(express.static(path.join(__dirname, '../')));
 app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname + '/index.html'));
 });
@@ -88,17 +88,13 @@ app.post("/checkSolution", function (req, res) { return __awaiter(_this, void 0,
         return [2 /*return*/];
     });
 }); });
-app.post("/listUri", function (req, res) { return __awaiter(_this, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        console.log(req.body.uri);
-        if (listUri.indexOf(req.body.uri) == -1) {
-            listUri.push(req.body.uri);
-        }
-        // @ts-ignore
-        res.status(200).send(JSON.stringify(listUri));
-        return [2 /*return*/];
-    });
-}); });
+// app.post("/listUri", async (req, res) => {
+//     console.log(req.body.uri);
+//     if(listUri.indexOf(req.body.uri) == -1){
+//         listUri.push(req.body.uri)
+//     }
+//     // @ts-ignore
+//     res.status(200).send(JSON.stringify(listUri));
+// });
 var porta = process.env.PORT || 8080;
 app.listen(porta);
-console.log("Server is running! :D");
